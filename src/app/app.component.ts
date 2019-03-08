@@ -17,5 +17,36 @@ export class AppComponent implements OnInit {
   chart = [];
   constructor(private httpClient: HttpClient) {}
 
+  ngOnInit() {
+    this.httpClient.get(this.url).subscribe((res: Data[]) => {
+      res.forEach(x => {
+        this.month.push(x.month);
+        this.price.push(x.month);
+      });
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: this.month,
+          datasets: [
+            {
+              data: this.price,
+              borderColor: '#3cba9f',
+              fill: false
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false;
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }]
+          }
+        }
+      });
+    });
+  }
 
 }
