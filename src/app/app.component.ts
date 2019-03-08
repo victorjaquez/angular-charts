@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
     this.httpClient.get(this.url).subscribe((res: Data[]) => {
       res.forEach(x => {
         this.month.push(x.month);
-        this.price.push(x.month);
-      });
+        this.price.push(x.price);
+      }); 
       this.chart = new Chart('canvas', {
         type: 'line',
         data: {
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
         },
         options: {
           legend: {
-            display: false;
+            display: false
           },
           scales: {
             xAxes: [{
